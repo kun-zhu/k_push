@@ -34,6 +34,8 @@ public class ManualPushoverHttpClient implements PushoverApi {
     public static final String KEY_URL_TITLE = "url_title";
     public static final String KEY_TITLE = "title";
     public static final String KEY_PRIORITY = "priority";
+    public static final String KEY_RETRY = "retry";
+    public static final String KEY_EXPIRE = "expire";
     public static final String KEY_SOUND = "sound";
     public static final String HOST_LIVE = "https://api.pushover.net/1/messages.json";
     private final LoadHttpResource loadHttpResource;
@@ -55,7 +57,9 @@ public class ManualPushoverHttpClient implements PushoverApi {
     }
 
     @Override
-    public PushoverResponse sendMessage(String token, String user, String message, String url, @SuppressWarnings("checkstyle:ParameterName") String url_title, String title, Integer priority, String sound) {
+    public PushoverResponse sendMessage(String token, String user, String message, String url,
+                                        @SuppressWarnings("checkstyle:ParameterName") String url_title, String title,
+                                        Integer priority,Integer retry,Integer expire, String sound) {
         ListOrderedMap<String, Object> body = new ListOrderedMap<>();
         body.put(KEY_TOKEN, token);
         body.put(KEY_USER, user);
@@ -71,6 +75,12 @@ public class ManualPushoverHttpClient implements PushoverApi {
         }
         if (priority != null) {
             body.put(KEY_PRIORITY, priority);
+        }
+        if (retry != null) {
+            body.put(KEY_RETRY, retry);
+        }
+        if (expire != null) {
+            body.put(KEY_EXPIRE, expire);
         }
         if (sound != null) {
             body.put(KEY_SOUND, sound);

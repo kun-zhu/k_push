@@ -30,13 +30,15 @@ public class LoadHttpResource {
         if (StringUtils.isNotBlank(ipAndPort)) {
             String[] ipAndPortArray = StringUtils.split(ipAndPort, ":");
             Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(ipAndPortArray[0], Integer.parseInt(ipAndPortArray[1])));
-            this.httpClient = new OkHttpClient.Builder().proxy(proxy).connectTimeout(timeoutInSec, TimeUnit.SECONDS) // 设置连接超时时间为 x 秒
+            this.httpClient = HttpClientSingleton.getHttpClient(proxy).newBuilder()
+                    .connectTimeout(timeoutInSec, TimeUnit.SECONDS) // 设置连接超时时间为 x 秒
                     .readTimeout(timeoutInSec, TimeUnit.SECONDS)    // 设置读取超时时间为 x 秒
                     .writeTimeout(timeoutInSec, TimeUnit.SECONDS)// 设置写入超时时间为 x 秒
                     .callTimeout(timeoutInSec, TimeUnit.SECONDS)// 设置请求的超时时间为 x 秒
                     .build();
         } else {
-            this.httpClient = new OkHttpClient.Builder().connectTimeout(timeoutInSec, TimeUnit.SECONDS) // 设置连接超时时间为 x 秒
+            this.httpClient = HttpClientSingleton.getHttpClient().newBuilder()
+                    .connectTimeout(timeoutInSec, TimeUnit.SECONDS) // 设置连接超时时间为 x 秒
                     .readTimeout(timeoutInSec, TimeUnit.SECONDS)    // 设置读取超时时间为 x 秒
                     .writeTimeout(timeoutInSec, TimeUnit.SECONDS)// 设置写入超时时间为 x 秒
                     .callTimeout(timeoutInSec, TimeUnit.SECONDS)// 设置请求的超时时间为 x 秒

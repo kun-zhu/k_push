@@ -35,6 +35,8 @@ public interface PushoverApi {
                 message.getUrlTitle(),
                 message.getTitle(),
                 message.getPriority() != null ? message.getPriority().getValue() : null,
+                message.getRetry(),
+                message.getExpire(),
                 message.getSound() != null ? message.getSound().toString() : null);
     }
 
@@ -46,5 +48,7 @@ public interface PushoverApi {
                                  @SuppressWarnings("checkstyle:ParameterName") String url_title,
                                  String title,
                                  Integer priority,
+                                 Integer retry,
+                                 Integer expire,
                                  String sound);
 }

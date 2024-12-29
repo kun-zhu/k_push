@@ -50,6 +50,25 @@ public class Message {
 
     private Priority priority;
 
+    private int retry;
+    private int expire;
+
+    public int getRetry() {
+        return retry;
+    }
+
+    public void setRetry(int retry) {
+        this.retry = retry;
+    }
+
+    public int getExpire() {
+        return expire;
+    }
+
+    public void setExpire(int expire) {
+        this.expire = expire;
+    }
+
     /**
      * the name of one of the sounds supported by device clients to override the user's default sound choice.
      */
@@ -124,6 +143,8 @@ public class Message {
         this.title = title;
     }
 
+
+
     @Override
     public String toString() {
         return "Message{" +
@@ -132,8 +153,10 @@ public class Message {
                 ", url='" + url + '\'' +
                 ", title='" + title + '\'' +
                 ", device='" + device + '\'' +
-                ", priority=" + (priority != null ? priority.getValue() : "null") +
-                ", sound=" + (sound != null ? sound.toString() : "null") +
+                ", priority=" + priority +
+                ", retry=" + retry +
+                ", expire=" + expire +
+                ", sound=" + sound +
                 ", timestamp=" + timestamp +
                 '}';
     }
